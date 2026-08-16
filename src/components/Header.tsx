@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import AppLogo from '@/components/ui/AppLogo';
 import Icon from '@/components/ui/AppIcon';
 
 const navLinks = [
@@ -24,7 +25,7 @@ export default function Header() {
 
   useEffect(() => {
     if (isMenuOpen) {
-      const handleScroll = () => setIsMenuOpen(false);
+      const handleScroll = () => setIsScrolled(window.scrollY > 50);
       window.addEventListener('scroll', handleScroll, { passive: true });
       return () => window.removeEventListener('scroll', handleScroll);
     }
@@ -41,9 +42,7 @@ export default function Header() {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">
-            H
-          </div>
+          <AppLogo size={36} />
           <span
             className={`font-bold text-lg tracking-tight hidden sm:block transition-colors duration-300 ${
               isScrolled ? 'text-primary' : 'text-white'
